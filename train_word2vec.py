@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from nltk.tokenize import sent_tokenize, word_tokenize 
+from nltk.corpus import stopwords 
 from gensim.models import Word2Vec
 import warnings 
 import sys
@@ -19,6 +20,11 @@ import string
 content_texts = content[['title', 'article_content', 'meta_title', 'meta_description', 'meta_keywords']]
 content['merged'] = content_texts.astype(str).apply(' '.join, 1).str.lower()
 content['merged'] = content['merged'].apply(lambda x: x.translate(str.maketrans('', '', string.punctuation)))
+
+# remove stopwords
+stop_words = stopwords.words('english')
+content['merged_words'] = content['merged'].apply(lambda x: [word for word in x.split(' ') if not word in stop_words])
+
 content['merged_words'] = content['merged'].apply(lambda x: x.split(' '))
 
 # train model

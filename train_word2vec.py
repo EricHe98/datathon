@@ -6,7 +6,7 @@ import warnings
 import sys
 warnings.filterwarnings(action = 'ignore') 
 
-# accept 
+# accept filenames as arguments
 pageviews_file = sys.argv[1]
 census_file = sys.argv[2]
 content_file = sys.argv[3]
@@ -37,4 +37,4 @@ colnames = ['embed_' + str(i) for i in range(32)]
 df.columns = colnames
 
 print('Writing embeddings to csv')
-df.to_csv('w2v_df.csv')
+df.to_csv('data/w2v_df.csv')
